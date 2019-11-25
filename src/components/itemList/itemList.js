@@ -50,7 +50,7 @@ export default class ItemList extends Component {
     renderItems(arr) {
         // const item = gotService.getAllCharacters();
         return arr.map( (item, i) => {
-            console.log(item);
+            // console.log(item.id);
             return (
                 <ListGroupItemCustom
                 key={item.id}
@@ -70,9 +70,9 @@ export default class ItemList extends Component {
         //     return <ErrorMessage/>
         // }
         
-        const spinner = !charList ? <Spinner/> : null;
+        const spinner = loading ? <Spinner/> : null;
         const errorMessage = error ? <ErrorMessage/> : null;
-        const content = !(charList || error) ? {items} : null;
+        // const content = !(charList || error) ? {items} : null;
         // const items = this.renderItems(charList);
         const items = !(loading || error) ? this.renderItems(charList) : null;
 
@@ -81,7 +81,7 @@ export default class ItemList extends Component {
                 {spinner}
                 {items}
                 {errorMessage}
-                {content}
+                {/* {content} */}
             </ListGroupCustom>
         );
     }

@@ -5,7 +5,7 @@ import Header from '../header';
 import RandomChar from '../randomChar';
 import ErrorMessage from '../errorMessage';
 import CharacterPage from '../characterPage';
-import gotService from '../../services/gotService';
+// import gotService from '../../services/gotService';
 import styled from 'styled-components';
 
 const ButtonViewRandom = styled.button`
