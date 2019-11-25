@@ -20,13 +20,15 @@ export default class ItemList extends Component {
     state = {
         charList: null,
         error: false
+        // loading: true
     }
 
     componentDidMount() {
         this.gotService.getAllCharacters()
             .then( (charList) => {
                 this.setState ({
-                    charList
+                    charList,
+                    loading: false
                 })
             })
     }
@@ -39,6 +41,7 @@ export default class ItemList extends Component {
     }
 
     renderItems(arr) {
+        // const item = gotService.getAllCharacters();
         return arr.map( (item, i) => {
             // console.log(item);
             return (
@@ -57,17 +60,20 @@ export default class ItemList extends Component {
 
         
         if (!charList) {
-            return <Spinner/>
+            return <ErrorMessage/>
         }
         
+        // const spinner = !charList ? <Spinner/> : null;
         const items = this.renderItems(charList);
-        const errorMessage = error ? <ErrorMessage/> : null;
-
+        // const errorMessage = error ? <ErrorMessage/> : null;
+        // const content = !(spinner || error) ? {items} : null;
 
         return (
             <ListGroupCustom>
                 {items}
-                {errorMessage}
+                {/* {errorMessage}
+                {spinner}
+                {content} */}
             </ListGroupCustom>
         );
     }
