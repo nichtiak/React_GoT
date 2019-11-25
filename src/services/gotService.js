@@ -1,7 +1,7 @@
 
 export default class GotService {
     constructor() {
-        this._apiBase = 'https://anapioficeandfire.com/api8'
+        this._apiBase = 'https://anapioficeandfire.com/api'
     }
 
     async getResource(url) {
