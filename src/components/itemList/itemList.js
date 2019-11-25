@@ -19,8 +19,9 @@ export default class ItemList extends Component {
 
     state = {
         charList: null,
-        error: false
-        // loading: true
+        error: false,
+        loading: true,
+        errorModule: false
     }
 
     componentDidMount() {
@@ -31,19 +32,25 @@ export default class ItemList extends Component {
                     loading: false
                 })
             })
+            .catch( () => {
+                this.setState ({
+                    loading: false,
+                    error: true
+                })
+            })
     }
 
     componentDidCatch() {
         // console.log('error');
         this.setState({
-            error: true
+            errorModule: true
         })
     }
 
     renderItems(arr) {
         // const item = gotService.getAllCharacters();
         return arr.map( (item, i) => {
-            // console.log(item);
+            console.log(item);
             return (
                 <ListGroupItemCustom
                 key={item.id}
@@ -56,24 +63,25 @@ export default class ItemList extends Component {
 
     render() {
 
-        const {charList, error} = this.state;
+        const {charList, error, loading} = this.state;
 
         
-        if (!charList) {
-            return <ErrorMessage/>
-        }
+        // if (!charList) {
+        //     return <ErrorMessage/>
+        // }
         
-        // const spinner = !charList ? <Spinner/> : null;
-        const items = this.renderItems(charList);
-        // const errorMessage = error ? <ErrorMessage/> : null;
-        // const content = !(spinner || error) ? {items} : null;
+        const spinner = !charList ? <Spinner/> : null;
+        const errorMessage = error ? <ErrorMessage/> : null;
+        const content = !(charList || error) ? {items} : null;
+        // const items = this.renderItems(charList);
+        const items = !(loading || error) ? this.renderItems(charList) : null;
 
         return (
             <ListGroupCustom>
-                {items}
-                {/* {errorMessage}
                 {spinner}
-                {content} */}
+                {items}
+                {errorMessage}
+                {content}
             </ListGroupCustom>
         );
     }
